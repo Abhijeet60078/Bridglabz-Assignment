@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="prodInput" placeholder="Add product">
+<button onclick="addProduct()">Add</button>
+
+<ul id="productList"></ul>
+
+<script>
+let ul = document.getElementById("productList");
+let editingSpan = null;
+
+function addProduct() {
+  let val = prodInput.value.trim();
+  if (!val) return;
+
+  ul.innerHTML += `
+    <li>
+      <span>${val}</span>
+      <button class="edit">Edit</button>
+      <button class="delete">Delete</button>
+    </li>`;
+  prodInput.value = "";
+}
+
+ul.addEventListener("click", function (e) {
+  let li = e.target.parentElement;
+  let span = li.querySelector("span");
+
+  if (e.target.className === "delete") li.remove();
+
+  if (e.target.className === "edit") {
+    if (editingSpan) editingSpan.contentEditable = false;
+    span.contentEditable = true;
+    span.focus();
+    editingSpan = span;
+  }
+});
+
+document.addEventListener("click", function (e) {
+  if (editingSpan && !ul.contains(e.target)) {
+    editingSpan.contentEditable = false;
+    editingSpan = null;
+  }
+});
+</script>
+
+</body>
+</html>

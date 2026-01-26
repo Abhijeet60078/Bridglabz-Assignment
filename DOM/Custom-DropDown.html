@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Select</button>
+<ul id="drop" hidden>
+  <li onclick="selectOpt('One')">One</li>
+  <li onclick="selectOpt('Two')">Two</li>
+</ul>
+
+<script>
+btn.onclick = () => drop.hidden = !drop.hidden;
+
+function selectOpt(v) {
+  btn.textContent = v;
+  drop.hidden = true;
+}
+
+document.addEventListener("click", () => drop.hidden = true, true);
+</script>
+
+    
+</body>
+</html>

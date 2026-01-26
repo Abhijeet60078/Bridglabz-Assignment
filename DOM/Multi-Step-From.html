@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="s1">
+  <input id="name" placeholder="Name">
+  <button onclick="next1()">Next</button>
+</div>
+
+<div id="s2" hidden>
+  <input id="email" placeholder="Email">
+  <button onclick="back1()">Back</button>
+  <button onclick="next2()">Next</button>
+</div>
+
+<div id="s3" hidden>
+  <input id="pass" placeholder="Password" type="password">
+  <button onclick="back2()">Back</button>
+  <button onclick="finish()">Finish</button>
+</div>
+
+<p id="result"></p>
+
+<script>
+function next1() {
+  if (!name.value) return alert("Enter name");
+  s1.hidden = true; s2.hidden = false;
+}
+function back1() { s2.hidden = true; s1.hidden = false; }
+
+function next2() {
+  if (!email.value.includes("@")) return alert("Invalid email");
+  s2.hidden = true; s3.hidden = false;
+}
+function back2() { s3.hidden = true; s2.hidden = false; }
+
+function finish() {
+  if (pass.value.length < 6) return alert("Min 6 chars");
+  result.textContent =
+    `Name: ${name.value}, Email: ${email.value}`;
+}
+</script>
+
+    
+</body>
+</html>

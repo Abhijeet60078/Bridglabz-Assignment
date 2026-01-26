@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="gallery">
+  <img src="https://via.placeholder.com/100" onclick="openModal(this.src)">
+</div>
+
+<div id="modal" onclick="closeModal()" style="display:none;
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.6);">
+  <img id="bigImg" onclick="event.stopPropagation()"
+  style="margin:100px auto;display:block;">
+</div>
+
+<script>
+function openModal(src) {
+  modal.style.display = "block";
+  bigImg.src = src;
+}
+function closeModal() {
+  modal.style.display = "none";
+}
+</script>
+
+    
+</body>
+</html>

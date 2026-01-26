@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="text" rows="4"></textarea>
+<p id="counter">100 left</p>
+<button onclick="reset()">Reset</button>
+
+<script>
+text.addEventListener("keydown", function (e) {
+  if (text.value.length >= 100 && e.key !== "Backspace") {
+    e.preventDefault();
+  }
+});
+
+text.addEventListener("input", function () {
+  let left = 100 - text.value.length;
+  counter.textContent = left + " left";
+
+  counter.style.color = "black";
+  if (left <= 20) counter.style.color = "orange";
+  if (left === 0) counter.style.color = "red";
+});
+
+function reset() {
+  text.value = "";
+  counter.textContent = "100 left";
+  counter.style.color = "black";
+}
+</script>
+
+    
+</body>
+</html>
