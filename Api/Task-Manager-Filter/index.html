@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Filter</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<select id="filter">
+  <option value="">All</option>
+  <option value="High">High</option>
+  <option value="Medium">Medium</option>
+  <option value="Low">Low</option>
+</select>
+
+<div id="tasks"></div>
+
+<script>
+function loadTasks(query = "") {
+  $.get("http://localhost:3003/tasks" + query, function (data) {
+    $("#tasks").empty();
+    data.forEach(t => {
+      $("#tasks").append(`
+        <p>
+          <input type="checkbox"
+                 ${t.completed ? "checked" : ""}
+                 onclick="toggle(${t.id}, ${t.completed})">
+          <b>${t.title}</b> - ${t.priority}
+        </p>
+      `);
+    });
+  });
+}
+
+$("#filter").change(function () {
+  let val = $(this).val();
+  loadTasks(val ? "?priority=" + val : "");
+});
+
+function toggle(id, done) {
+  $.ajax({
+    url: "http://localhost:3003/tasks/" + id,
+    method: "PATCH",
+    contentType: "application/json",
+    data: JSON.stringify({ completed: !done }),
+    success: function () {
+      let val = $("#filter").val();
+      loadTasks(val ? "?priority=" + val : "");
+    }
+  });
+}
+
+loadTasks();
+</script>
+
+</body>
+</html>

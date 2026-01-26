@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Status Dashboard</title>
+</head>
+<body>
+
+<h2>Employee Status</h2>
+<div id="emp"></div>
+<p id="error" style="color:red;"></p>
+
+<script>
+/* FETCH EMPLOYEES */
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "http://localhost:3002/employees");
+
+xhr.onload = function () {
+  let data = JSON.parse(xhr.responseText);
+  let empDiv = document.getElementById("emp");
+  empDiv.innerHTML = "";
+
+  data.forEach(e => {
+    empDiv.innerHTML += `
+      <p>
+        ${e.name} - <b>${e.status}</b>
+        <button onclick="toggleStatus(${e.id}, '${e.status}')">
+          Toggle
+        </button>
+      </p>
+    `;
+  });
+};
+
+xhr.send();
+
+/* TOGGLE STATUS */
+function toggleStatus(id, status) {
+  let newStatus = status === "active" ? "inactive" : "active";
+
+  let x = new XMLHttpRequest();
+  x.open("PATCH", "http://localhost:3002/employees/" + id);
+  x.setRequestHeader("Content-Type", "application/json");
+
+  x.onload = function () {
+    if (x.status === 200) {
+      location.reload();   // update UI immediately
+    } else {
+      document.getElementById("error").textContent =
+        "Failed to update status";
+    }
+  };
+
+  x.onerror = function () {
+    document.getElementById("error").textContent =
+      "Network error occurred";
+  };
+
+  x.send(JSON.stringify({ status: newStatus }));
+}
+</script>
+
+</body>
+</html>

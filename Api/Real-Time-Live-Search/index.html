@@ -1,0 +1,25 @@
+<input type="text" id="search" placeholder="Search product">
+<div id="loading" style="display:none;">Loading...</div>
+<div id="result"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$("#search").on("keyup", function () {
+  let value = $(this).val();
+  $("#loading").show();
+
+  $.get("http://localhost:3001/products?q=" + value, function (data) {
+    $("#loading").hide();
+    $("#result").html("");
+
+    if (data.length === 0) {
+      $("#result").text("No products found");
+      return;
+    }
+
+    data.forEach(p => {
+      $("#result").append(`<p>${p.name} - ₹${p.price}</p>`);
+    });
+  });
+});
+</script>

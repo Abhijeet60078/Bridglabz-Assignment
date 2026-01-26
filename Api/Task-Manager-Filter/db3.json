@@ -1,0 +1,9 @@
+{
+  "tasks": [
+    { "id": 1, "title": "Study", "priority": "High", "completed": false },
+    { "id": 2, "title": "Workout", "priority": "Low", "completed": true },
+    { "id": 3, "title": "Project", "priority": "Medium", "completed": false },
+    { "id": 4, "title": "Shopping", "priority": "Low", "completed": false },
+    { "id": 5, "title": "Revision", "priority": "High", "completed": true }
+  ]
+}
