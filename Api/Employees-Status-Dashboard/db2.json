@@ -1,9 +1,0 @@
-{
-  "employees": [
-    { "id": 1, "name": "Amit", "status": "active" },
-    { "id": 2, "name": "Riya", "status": "inactive" },
-    { "id": 3, "name": "Kunal", "status": "active" },
-    { "id": 4, "name": "Neha", "status": "inactive" },
-    { "id": 5, "name": "Rahul", "status": "active" }
-  ]
-}
